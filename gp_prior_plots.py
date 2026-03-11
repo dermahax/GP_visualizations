@@ -1,5 +1,6 @@
 import numpy as np
 import matplotlib.pyplot as plt
+import matplotlib.animation as animation
 import seaborn as sns
 
 
@@ -77,11 +78,10 @@ ax1.fill_between(
     X_prior,
     prior_mean - sigma * prior_sd,
     prior_mean + sigma * prior_sd,
-    color="gray",
     alpha=0.35,
     label="95% confidence interval",
 )
-ax1.plot(X_prior, prior_mean, color="black", lw=2, label="Prior mean")
+ax1.plot(X_prior, prior_mean, lw=2, label="Prior mean")
 
 ax1.set_title("GP Prior: Mean 0 with 2-sigma Confidence Interval",
               fontsize=14, fontweight="bold")
@@ -102,11 +102,10 @@ ax2.fill_between(
     X_prior,
     prior_mean - sigma * prior_sd,
     prior_mean + sigma * prior_sd,
-    color="gray",
     alpha=0.35,
     label="95% confidence interval",
 )
-ax2.plot(X_prior, prior_mean, color="black", lw=2, label="Prior mean")
+ax2.plot(X_prior, prior_mean, lw=2, label="Prior mean")
 
 draw_colors = sns.color_palette("husl", 3)
 for i, color in enumerate(draw_colors, start=1):
@@ -165,11 +164,10 @@ for n, X_n, y_n, mu_n, sd_n in posteriors:
         X_prior,
         mu_n - sigma * sd_n,
         mu_n + sigma * sd_n,
-        color="gray",
         alpha=0.35,
         label="95% confidence interval",
     )
-    ax.plot(X_prior, mu_n, color="black", lw=2.2, label="Posterior mean")
+    ax.plot(X_prior, mu_n, lw=2.2, label="Posterior mean")
     ax.errorbar(
         X_n,
         y_n,
@@ -198,3 +196,63 @@ for n, X_n, y_n, mu_n, sd_n in posteriors:
     plt.savefig(
         f"gp_posterior_added_points_{n}.png", dpi=150, bbox_inches="tight")
     plt.show()
+
+# ----- Animation: GIF of posterior updates -----
+prop_cycle = plt.rcParams["axes.prop_cycle"]
+colors = prop_cycle.by_key()["color"]
+ci_color = colors[0]
+mean_color = colors[0]
+
+fig_anim, ax_anim = plt.subplots(figsize=(10, 6))
+
+
+def draw_frame(frame_data):
+    n, X_n, y_n, mu_n, sd_n = frame_data
+    ax_anim.cla()
+    ax_anim.fill_between(
+        X_prior,
+        mu_n - sigma * sd_n,
+        mu_n + sigma * sd_n,
+        color=ci_color,
+        alpha=0.35,
+        label="95% confidence interval",
+    )
+    ax_anim.plot(X_prior, mu_n, color=mean_color,
+                 lw=2.2, label="Posterior mean")
+    ax_anim.errorbar(
+        X_n,
+        y_n,
+        yerr=sn_data,
+        fmt="o",
+        ms=8,
+        elinewidth=2,
+        capsize=4,
+        label="Observed data",
+        color="steelblue",
+    )
+    point_label = "point" if n == 1 else "points"
+    ax_anim.set_title(
+        f"GP Posterior After Adding {n} Data {point_label}",
+        fontsize=14,
+        fontweight="bold",
+    )
+    ax_anim.set_xlabel("Input (x)", fontsize=12)
+    ax_anim.set_ylabel("Output (y)", fontsize=12)
+    ax_anim.set_xlim(-5.5, 5.5)
+    ax_anim.set_ylim(posterior_y_min, posterior_y_max)
+    ax_anim.legend(loc="best", frameon=True, shadow=True)
+    ax_anim.grid(True, alpha=0.3)
+
+
+anim = animation.FuncAnimation(
+    fig_anim,
+    draw_frame,
+    frames=posteriors,
+    interval=4000,  # 4 seconds per frame
+    repeat=True,
+)
+
+plt.tight_layout()
+anim.save("gp_posterior_animation.gif", writer="pillow", fps=0.25, dpi=100)
+print("Saved gp_posterior_animation.gif")
+plt.close(fig_anim)
