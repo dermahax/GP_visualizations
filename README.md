@@ -1,10 +1,19 @@
 # Gaussian Process Visualizations
 
-A collection of Python scripts and Jupyter notebooks that build up intuition for **Gaussian Processes (GPs)** through step-by-step visualizations.
+A collection of  Jupyter notebooks that build up intuition for **Gaussian Processes (GPs)** through step-by-step visualizations.
 
-## What's inside
+## Examples
 
-### `gp_plots.py` — GP Regression
+### `gp_prior_plots.ipynb` — GP Prior -> Posterior
+- GP **prior** mean with 2-sigma confidence band
+- GP prior with 3 random draws
+- GP **posterior** updating as observations are added one by one (animation)
+
+| Prior CI | Prior + random draws | Posterior (updating) |
+|---|---|---|
+| <img src="imgs/gp_prior_confidence_only.png" width="260"/> | <img src="imgs/gp_prior_random_draws.png" width="260"/> | <img src="imgs/gp_posterior_animation.gif" width="260"/> |
+
+### `gp_hyperparams.ipynb` — Effect of hyperparameter
 Demonstrates GP regression with a squared-exponential (RBF) kernel on synthetic data:
 - Raw data with noise error bars
 - GP fit with the **correct** length-scale (ℓ = 1.0)
@@ -14,20 +23,16 @@ Demonstrates GP regression with a squared-exponential (RBF) kernel on synthetic 
 
 | Correct ℓ | Short ℓ | Long ℓ |
 |---|---|---|
-| ![](imgs/gp_plot_correct_lengthscale.png) | ![](imgs/gp_plot_short_lengthscale.png) | ![](imgs/gp_plot_long_lengthscale.png) |
+| <img src="imgs/gp_plot_correct_lengthscale.png" width="260"/> | <img src="imgs/gp_plot_short_lengthscale.png" width="260"/> | <img src="imgs/gp_plot_long_lengthscale.png" width="260"/> |
 
-### `gp_prior_plots.py` / `gp_prior_plots.ipynb` — GP Prior & Posterior Updates
-- GP **prior** mean with 2-sigma confidence band
-- GP prior with 3 random draws
-- GP **posterior** updating as observations are added one by one (animation)
 
-| Prior CI | Prior + random draws |
-|---|---|
-| ![](imgs/gp_prior_confidence_only.png) | ![](imgs/gp_prior_random_draws.png) |
 
-#### Posterior update animation
+### `gp_kernels.ipynb` — Kernel Comparison
+Shows random draws from the GP prior and posterior fitting for three kernels: Squared Exponential, Linear, and Periodic.
 
-![GP Posterior Animation](imgs/gp_posterior_animation.gif)
+| Squared Exponential | Linear | Periodic |
+|---|---|---|
+| <img src="imgs/gp_kernel_se_draws.png" width="260"/> | <img src="imgs/gp_kernel_linear_draws.png" width="260"/> | <img src="imgs/gp_kernel_periodic_draws.png" width="260"/> |
 
 ## Installation
 
@@ -47,6 +52,7 @@ Or open the notebooks in Jupyter / VS Code to explore interactively with inline 
 | Notebook | Contents |
 |---|---|
 | `gp_prior_plots.ipynb` | GP prior CI, random draws, posterior update animation |
+| `gp_hyperparams.ipynb` | GP regression with correct, too-short, and too-long length-scales |
 | `gp_kernels.ipynb` | Prior draws + posterior fitting animations for SE, Linear, and Periodic kernels |
 
 ### `data_creation.py` — Shared Dataset
