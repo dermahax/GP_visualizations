@@ -32,7 +32,7 @@ Shows random draws from the GP prior and posterior fitting for three kernels: Sq
 
 | Squared Exponential | Linear | Periodic |
 |---|---|---|
-| <img src="imgs/gp_kernel_se_draws.png" width="260"/> | <img src="imgs/gp_kernel_linear_draws.png" width="260"/> | <img src="imgs/gp_kernel_periodic_draws.png" width="260"/> |
+| <img src="imgs/gp_kernel_se_anim.gif" width="260"/> | <img src="imgs/gp_kernel_linear_anim.gif" width="260"/> | <img src="imgs/gp_kernel_periodic_anim.gif" width="260"/> |
 
 ## Installation
 
