@@ -4,7 +4,7 @@ A collection of  Jupyter notebooks that build up intuition for **Gaussian Proces
 
 ## Examples
 
-### `gp_prior_plots.ipynb` — GP Prior -> Posterior
+### `gp_prior_posterior.ipynb` — GP Prior -> Posterior
 - GP **prior** mean with 2-sigma confidence band
 - GP prior with 3 random draws
 - GP **posterior** updating as observations are added one by one (animation)
@@ -41,21 +41,11 @@ pip install -e .
 ```
 
 ## Usage
-
-```bash
-python gp_plots.py          # GP regression plots
-python gp_prior_plots.py    # prior plots + animation GIF
-```
-
-Or open the notebooks in Jupyter / VS Code to explore interactively with inline animation players:
+Open the notebooks in Jupyter / VS Code to explore interactively with inline animation players:
 
 | Notebook | Contents |
 |---|---|
-| `gp_prior_plots.ipynb` | GP prior CI, random draws, posterior update animation |
+| `gp_prior_posterior.ipynb` | GP prior CI, random draws, posterior update animation |
 | `gp_hyperparams.ipynb` | GP regression with correct, too-short, and too-long length-scales |
 | `gp_kernels.ipynb` | Prior draws + posterior fitting animations for SE, Linear, and Periodic kernels |
 
-### `data_creation.py` — Shared Dataset
-
-A standalone module used by all notebooks to generate the same synthetic dataset, ensuring direct comparability across experiments.
-The observations are drawn from a GP with noise $\sigma_n = 0.1$.
