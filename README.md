@@ -35,6 +35,11 @@ Shows random draws from the GP prior and posterior fitting for three kernels: Sq
 |---|---|---|
 | <img src="imgs/gp_kernel_se_anim.gif" width="260"/> | <img src="imgs/gp_kernel_linear_anim.gif" width="260"/> | <img src="imgs/gp_kernel_periodic_anim.gif" width="260"/> |
 
+### `gp_kernel_addition.ipynb` — Additive Kernel Animation
+This notebook shows how the GP posterior changes as kernels are added one by one on the same dataset. It progresses through four frames: data only, linear, linear + periodic, and linear + periodic + exp-square, with uncertainty shown as a shaded confidence interval and dashed CI bounds in posterior frames.
+
+<img src="imgs/gp_kernel_addition_anim.gif" width="520"/>
+
 ## Installation
 
 ```bash
