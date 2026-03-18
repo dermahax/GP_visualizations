@@ -40,18 +40,19 @@ This notebook shows how the GP posterior changes as kernels are added one by one
 
 <img src="imgs/gp_kernel_addition_anim.gif" width="520"/>
 
+### `gp_signal_seperation.ipynb` — Additive Signal Seperation
+This notebook uses an additive GP kernel to separate an observed target into two latent components:
+- A smooth time-driven signal
+- A more fluctuative temperature-driven signal
+
+The final animation overlays transparent stacked component bars on the main time-vs-target plot, and shows the recovered component signals alongside their true generating signals.
+
+<img src="imgs/gp_signal_seperation_anim.gif" width="700"/>
+
 ## Installation
 
 ```bash
 pip install -e .
 ```
 
-## Usage
-Open the notebooks in Jupyter / VS Code to explore interactively with inline animation players:
-
-| Notebook | Contents |
-|---|---|
-| `gp_prior_posterior.ipynb` | GP prior CI, random draws, posterior update animation |
-| `gp_hyperparams.ipynb` | GP regression with correct, too-short, and too-long length-scales |
-| `gp_kernels.ipynb` | Prior draws + posterior fitting animations for SE, Linear, and Periodic kernels |
 
