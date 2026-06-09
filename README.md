@@ -56,3 +56,6 @@ pip install -e .
 ```
 
 
+## external Links
+[Interactive GP App](https://infallible-thompson-49de36.netlify.app/)
+
